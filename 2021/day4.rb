@@ -6,34 +6,27 @@ class Board
   def initialize (arr)
     @rows = []
     arr.each do |a|
-      s = a.split
-      @rows << s.map(&:to_i)
+      @rows << a.split.map(&:to_i)
     end
     @cols = @rows.transpose
-    puts "rows #{@rows}"
-    puts "cols #{@cols}"
   end
 
   def fill(n)
-    puts "n #{n}"
     br = false
     @rows.each do |r|
-      puts "r1 = #{r}"
       r.delete(n)
-      puts "r2 = #{r}"
-      if r.nil? || r.length == 0
+      if r.length == 0
         br = true
       end
     end
 
     @cols.each do |c|
       c.delete(n)
-      if c.nil? || c.length == 0
+      if c.length == 0
         br = true
       end
     end
     if br
-      puts "b2 #{br}"
       return true
     end
     false
@@ -53,7 +46,6 @@ vals = []
 boards = []
 f = gets
 nums = f.split(',').map(&:to_i)
-puts "nums = #{nums}"
 gets
 while l = gets
   l = l.strip
