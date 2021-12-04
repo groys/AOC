@@ -66,17 +66,20 @@ while l = gets
   vals << l
 end
 boards << Board.new(vals)
-puts "hello"
-done = false
+done = 0
+skip = Array.new(boards.size, false)
 nums.each { |n|
-  if done
+  if done == boards.size
     break
   end
-  boards.each { |b|
-    if b.fill(n)
-      puts "ans=#{n*b.cal}"
-      done = true
-      break
+  boards.each_with_index { |b, i|
+    if !skip[i] && b.fill(n)
+      done += 1
+      skip[i] = true
+      if done == boards.size
+        puts "n = #{n} cal=#{b.cal} ans= #{n*b.cal}"
+        break
+      end
     end
   }
 }
