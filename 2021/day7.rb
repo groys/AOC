@@ -24,7 +24,7 @@ def part2
   maxa = $a.max
   min = mina
   for i in mina..maxa do
-    if (comp_rate_dist(i) < comp_rate_dist(min))
+    if comp_rate_dist(i) < comp_rate_dist(min)
       min = i
     end
   end
