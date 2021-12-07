@@ -14,17 +14,24 @@ def comp_rate_dist(point)
   end
 end
 
-$stdout.sync = true
-$a = gets.split(",").map(&:to_i)
-mina = $a.min
-maxa = $a.max
-min = mina
-for i in mina..maxa do
-  if (comp_rate_dist(i) < comp_rate_dist(min))
-    min = i
-  end
+def part1
+  min = $a.min { |a, b| comp_dist(a) <=> comp_dist(b) }
+  puts "part1 min = #{min} dist = #{comp_dist(min)}"
 end
 
-#min = $a.min { |a, b| comp_rate_dist(a) <=> comp_rate_dist(b) }
-#puts "a = #{a}"
-puts "min = #{min} dist = #{comp_rate_dist(min)}"
+def part2
+  mina = $a.min
+  maxa = $a.max
+  min = mina
+  for i in mina..maxa do
+    if (comp_rate_dist(i) < comp_rate_dist(min))
+      min = i
+    end
+  end
+  puts "part2 min = #{min} dist = #{comp_rate_dist(min)}"
+end
+
+$stdout.sync = true
+$a = gets.split(",").map(&:to_i)
+part1
+part2
