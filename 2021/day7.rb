@@ -3,7 +3,7 @@
 # Date: 12/6/21
 # Time: 8:57 PM
 # To change this template use File | Settings | File Templates.
-
+# Time Complexity O(N^2)
 def comp_dist(point)
   $a.reduce(0) { |sum, num| sum + (num - point).abs }
 end
