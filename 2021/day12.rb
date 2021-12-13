@@ -14,7 +14,10 @@ def visit(n)
   if n == "end"
     #puts "$v = #{$v}"
     $path << "end"
-    $paths << $path.clone
+    val = $paths.add?($path.clone)
+    if val.nil?
+      puts "dup"
+    end
     $path.delete("end")
     return
   end
