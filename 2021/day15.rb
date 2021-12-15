@@ -2,6 +2,12 @@ def print2d(a)
   a.each { |e| puts "#{e}" }
 end
 
+# Not using Dijkstra
+# Maintain $d which captures risk of traversing from i,j to right bottom
+# Start from bottom right corner. Maintain queue of vertexes that you encounter
+# relax (clrs) each non-diagonal edge you encounter
+# queue vertex if its d changes
+# mind the 0, 0 vertex to not add its cost
 def compute_dist
   $d = Array.new($L) {
     Array.new($L, $MAX)
