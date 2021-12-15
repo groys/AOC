@@ -16,45 +16,22 @@ def compute_dist
   q = []
   q.unshift([$L - 1, $L - 1])
   until q.empty?
-    x, y = q.pop
-    if x == 0 && y == 0
-      $d[x][y] = [$d[x + 1][y], $d[x][y + 1]].min
-      next
-    end
+    m, n = q.pop
     #check all 4 directions
     c = 0
-    if y - 1 >= 0
-      unless y - 1 == 0 && x == 0
-        c = $a[x][y - 1]
-      end
-      if $d[x][y - 1] > $d[x][y] + c
-        $d[x][y - 1] = $d[x][y] + c
-        q.unshift([x, y - 1])
-      end
-    end
-    if y + 1 <= $L - 1
-      c = $a[x][y + 1]
-      if $d[x][y + 1] > $d[x][y] + c
-        $d[x][y + 1] = $d[x][y] + c
-        q.unshift([x, y + 1])
-      end
-    end
-    if x - 1 >= 0
-      unless y == 0 && x - 1 == 0
-        c = $a[x - 1][y]
-      end
-      if $d[x - 1][y] > $d[x][y] + c
-        $d[x - 1][y] = $d[x][y] + c
-        q.unshift([x - 1, y])
-      end
-      if x + 1 <= $L - 1
-        c = $a[x + 1][y]
-        if $d[x + 1][y] > $d[x][y] + c
-          $d[x + 1][y] = $d[x][y] + c
-          q.unshift([x + 1, y])
+    (0...4).each { |i|
+      x = $xm[i] + m
+      y = $ym[i] + n
+      if x >= 0 && x <= $L - 1 && y >= 0 && y <= $L - 1
+        unless y == 0 && x == 0
+          c = $a[x][y]
+        end
+        if $d[x][y] > $d[m][n] + c
+          $d[x][y] = $d[m][n] + c
+          q.unshift([x, y])
         end
       end
-    end
+    }
   end
   puts "#{$d[0][0]}"
 end
@@ -67,6 +44,8 @@ def increment
   }
 end
 
+$xm = [0, 0, -1, 1]
+$ym = [-1, 1, 0, 0]
 $aa = []
 while l = gets
   l.strip!
@@ -84,8 +63,7 @@ while step < 9
   if step != 0
     increment
   end
-  p "step = #{step}"
-  print2d($aa)
+
   if step > 4
     y = 4
     x = step - y
@@ -98,7 +76,6 @@ while step < 9
     (0...$LL).each { |i|
       (0...$LL).each { |j|
         $a[$LL * x + i][$LL * y + j] = $aa[i][j]
-        #puts "i = #{$LL * x + i} j = #{$LL * y + j}"
       }
     }
     y -= 1
@@ -106,6 +83,4 @@ while step < 9
   end
   step += 1
 end
-#print2d($a)
-# how to co
 compute_dist
