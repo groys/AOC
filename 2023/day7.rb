@@ -16,7 +16,7 @@ def compareHandStrings(s1, s2)
 end
 
 
-def handTypePart1(hand)
+def handType(hand)
   c = hand.cards
   map = {}
   c.each_char do |ch|
@@ -28,6 +28,7 @@ def handTypePart1(hand)
   end
   puts "map = #{map}"
   setType(hand, map)
+  # For part 2
   if map.has_key?('J')
     case hand.type
     when 0
@@ -86,10 +87,10 @@ end
 
 
 hands = []
-while line = gets
-  a = line.split()
+while (line = gets)
+  a = line.split
   h = Hand.new(a[0], a[1].to_i)
-  handTypePart1(h)
+  handType(h)
   hands << h
 end
 puts "hands #{hands}"
@@ -104,8 +105,8 @@ hands.sort!{|a, b|
 puts "hands #{hands}"
 ret = 0
 i = 1
-hands.each do |h|
-  ret += h.bid*i
+hands.each do |hand|
+  ret += hand.bid*i
   i += 1
 end
 puts ret
