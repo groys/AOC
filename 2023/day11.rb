@@ -39,29 +39,19 @@ end
 d = 0
 
 for i in 0...p.length
-  for j in (i+1)...p.length
+  for j in (i + 1)...p.length
     d1 = 0
     d1 += (p[i][0] - p[j][0]).abs
     # count number of x
-    mi = [p[i][0], p[j][0]].min
-    ma = [p[i][0], p[j][0]].max
-    c1 = 0
-    for k in mi...ma
-      if grid[k][0] == 'x'
-        c1 += 1
-      end
-    end
-    d1 += c1 * (mult-1)
+    mi, ma = [p[i][0], p[j][0]].minmax
+    c1 = grid[mi...ma].count { |row| row[0] == 'x' }
+    d1 += c1 * (mult - 1)
+    
     d1 += (p[i][1] - p[j][1]).abs
     # count number of x
-    mi = [p[i][1], p[j][1]].min
-    ma = [p[i][1], p[j][1]].max
-    c2 = 0
-    for k in mi...ma
-      if grid[0][k] == 'x'
-        c2 += 1
-      end
-    end
+    mi, ma = [p[i][1], p[j][1]].minmax
+
+    c2 = grid[0][mi...ma].count { |c| c == 'x' }
     d1 += c2 * (mult - 1)
     d += d1
     # puts "i #{i} j #{j} c1 #{c1} c2 #{c2} d1 #{d1}"
