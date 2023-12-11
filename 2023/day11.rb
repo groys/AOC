@@ -2,6 +2,7 @@
 # all pairs shortest path
 # |x1 - x2| + |y1-y2| + 1
 $stdout.sync = true
+# mult = 2 for part 1
 mult = 1000000
 
 grid = []
@@ -34,7 +35,7 @@ for i in 0...grid.length
     end
   end
 end
-puts "#{p}"
+# puts "#{p}"
 d = 0
 
 for i in 0...p.length
@@ -62,10 +63,8 @@ for i in 0...p.length
       end
     end
     d1 += c2 * (mult - 1)
-    d += d1 #+ 1
+    d += d1
     # puts "i #{i} j #{j} c1 #{c1} c2 #{c2} d1 #{d1}"
   end
 end
 puts "part2 #{d}"
-
-# part 2
