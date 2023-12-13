@@ -50,7 +50,14 @@ count = 0
 while line = gets
   a = line.split
   grps = a[1].split(',').map(&:to_i)
-  arr << Row.new(a[0], grps)
+  s = a[0]
+  groups = grps
+  4.times {
+    s = s + '?' + a[0]
+    groups += grps
+  }
+
+  arr << Row.new(s, groups)
 end
 puts "arr = #{arr}"
 it = 0
